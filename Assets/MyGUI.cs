@@ -131,7 +131,7 @@ public class MyGUI : MonoBehaviour
 		origin = new Vector3 (camera.transform.position.x, camera.transform.position.y, camera.transform.position.z);
 
 		/* Add a few default colors */
-		ownerColors.Add ("barbarian", new Color(0.5f, 0.5f, 0.5f, 0.7f));
+		ownerColors.Add ("barbarian", new Color(0.3f, 0.3f, 0.3f, 0.7f));
 		ownerColors.Add ("k", new Color(0.0f, 0.0f, 1.0f, 0.7f));
 	}
 

@@ -142,6 +142,7 @@ public class MyGUI : MonoBehaviour
 		Color color;
 		if (!ownerColors.TryGetValue (name, out color)) {
 			color = new Color (Random.Range (0.0f, 1.0f), Random.Range (0.0f, 1.0f), Random.Range (0.0f, 1.0f));
+			ownerColors.Add(name, color);
 		}
 		return color;
 	}

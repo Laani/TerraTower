@@ -121,9 +121,9 @@ public class MyGUI : MonoBehaviour
 		checkMyGyroController ();
 
 		/* set the initial location */
-		/* TODO: This needs to be completed */
-		// K: can someone do this? I'm not sure what variables we're supposed to set for
-		// intial location, and to what...?
+		lastLng = myLocation.getLng ();
+		lastLat = myLocation.getLat ();
+		lastAlt = myLocation.getAlt ();
 
 		/* Set the camera components to initial values */
 		fracJourney = 0.0f;
@@ -383,7 +383,7 @@ public class MyGUI : MonoBehaviour
 			return;
 
 		GUI.Box (new Rect (0, Screen.height / 10, Screen.width, Screen.height / 10), "Current Location");
-		GUI.Label (new Rect (0, Screen.height / 10, Screen.width, Screen.height / 10), "(" + myLocation.getLng () + ", " + myLocation.getLat () + ") " + myLocation.getAlt ());
+		GUI.Label (new Rect (0, Screen.height / 10, Screen.width, Screen.height / 10), "(" + lastLng + ", " + lastLat + ") " + lastAlt);
 
 		GUI.Box (new Rect (0, Screen.height / 10 * 2, Screen.width, Screen.height / 10), "Tower Location");
 		if (myNetworkHelper.isTowerSet ()) {
@@ -420,31 +420,23 @@ public class MyGUI : MonoBehaviour
 		/* Right column */
 
 		if (GUI.Button (new Rect (Screen.width / 2, Screen.height / 10 * 4, Screen.width / 2, Screen.height / 10), "Place Tower")) {
-			// TODO: Code to place a tower
-			// K: Use -> public void buildTowerPoint(double lat, double lng, double alt)
+			myNetworkHelper.buildTowerPoint (lastLat, lastLng, lastAlt);
 		}
 
 		if (GUI.Button (new Rect (Screen.width / 2, Screen.height / 10 * 5, Screen.width / 2, Screen.height / 10), "Upload Tower")) {
-			// TODO: Code to upload the tower coords
-			// K: Use -> public void uploadTowerPoint(string worldName,string worldPassword,string playerName,string playerPassword,Action<Dictionary<string,object>> callback)
-			// For all callacks, we already have this function -> private void genericCallback(Dictionary<string,object> state)
+			myNetworkHelper.uploadTowerPoint (worldName, worldPassword, playerName, playerPassword, genericCallback);
 		}
 
 		if (GUI.Button (new Rect (Screen.width / 2, Screen.height / 10 * 6, Screen.width / 2, Screen.height / 10), "Place Bomb")) {
-			// TODO: Code to place a bomb
-			// K: Use -> public void dropBombPoint(double lat, double lng, double alt)
+			myNetworkHelper.dropBombPoint (lastLat, lastLng, lastAlt);
 		}
 
 		if (GUI.Button (new Rect (Screen.width / 2, Screen.height / 10 * 7, Screen.width / 2, Screen.height / 10), "Upload Bomb")) {
-			// TODO: Code to upload the bomb coords
-			// K: Use -> public void uploadBombPoint(string worldName,string worldPassword,string playerName,string playerPassword,Action<Dictionary<string,object>> callback)
-			// For all callacks, we already have this function -> private void genericCallback(Dictionary<string,object> state)
+			myNetworkHelper.uploadBombPoint (worldName, worldPassword, playerName, playerPassword, genericCallback);
 		}
 
 		if (GUI.Button (new Rect (Screen.width / 2, Screen.height / 10 * 8, Screen.width / 2, Screen.height / 10), "Upload Code")) {
-			// TODO: Code to upload the secret code
-			// K: Use -> public void uploadCode(string worldName,string worldPassword,string playerName,string playerPassword,string code,Action<Dictionary<string,object>> callback)
-			// For all callacks, we already have this function -> private void genericCallback(Dictionary<string,object> state)
+			myNetworkHelper.uploadCode (worldName, worldPassword, playerName, playerPassword, secretcode, genericCallback);
 		}
 	}
 

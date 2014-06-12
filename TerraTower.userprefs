@@ -2,8 +2,8 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\MyGUI.cs">
     <Files>
-      <File FileName="Assets\MyGUI.cs" Line="321" Column="12" />
-      <File FileName="Assets\MyLocation.cs" Line="32" Column="27" />
+      <File FileName="Assets\MyGUI.cs" Line="148" Column="30" />
+      <File FileName="Assets\MyLocation.cs" Line="93" Column="19" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

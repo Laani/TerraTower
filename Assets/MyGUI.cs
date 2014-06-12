@@ -131,8 +131,8 @@ public class MyGUI : MonoBehaviour
 		origin = new Vector3 (camera.transform.position.x, camera.transform.position.y, camera.transform.position.z);
 
 		/* Add a few default colors */
-		ownerColors.Add ("barbarian", new Color(0.5f, 0.5f, 0.5f));
-		ownerColors.Add ("k", new Color(0.0f, 0.0f, 1.0f));
+		ownerColors.Add ("barbarian", new Color(0.5f, 0.5f, 0.5f, 0.7f));
+		ownerColors.Add ("k", new Color(0.0f, 0.0f, 1.0f, 0.7f));
 	}
 
 	/* Return a color for a given territory owner.  If we don't have a color,
@@ -141,7 +141,7 @@ public class MyGUI : MonoBehaviour
 	{
 		Color color;
 		if (!ownerColors.TryGetValue (name, out color)) {
-			color = new Color (Random.Range (0.0f, 1.0f), Random.Range (0.0f, 1.0f), Random.Range (0.0f, 1.0f));
+			color = new Color (Random.Range (0.0f, 1.0f), Random.Range (0.0f, 1.0f), Random.Range (0.0f, 1.0f), 0.7f);
 			ownerColors.Add(name, color);
 		}
 		else {

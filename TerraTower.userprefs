@@ -1,11 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\MyGUI.cs">
     <Files>
-      <File FileName="Assets\MyGUI.cs" Line="1" Column="1" />
-      <File FileName="Assets\MyGUI.cs" Line="1" Column="1" />
-      <File FileName="Assets\GyroController.cs" Line="1" Column="1" />
-      <File FileName="Assets\MyNetworkHelper.cs" Line="1" Column="1" />
+      <File FileName="Assets\MyGUI.cs" Line="321" Column="12" />
+      <File FileName="Assets\MyLocation.cs" Line="32" Column="27" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

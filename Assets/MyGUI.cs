@@ -293,7 +293,7 @@ public class MyGUI : MonoBehaviour
 
 						//If there is a tower, then create one
 						if (_tower.ToString ().Equals ("true")) {
-							Object thing = Instantiate (tower, new Vector3 (indexX * stepXMeters, 0.0f, indexY * stepYMeters), Quaternion.Euler (270, 0, 0));
+							Object thing = Instantiate (tower, new Vector3 (indexX * stepXMeters, 0.0f, indexY * stepYMeters), Quaternion.identity);
 							((GameObject)thing).transform.localScale = new Vector3 (0.05f, 0.05f, 0.1f);
 							tempWorld.Add (thing);
 							Debug.Log ("Got a tower" + indexX * stepXMeters + " " + alt + " " + indexY * stepYMeters);

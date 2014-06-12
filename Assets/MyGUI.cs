@@ -125,6 +125,12 @@ public class MyGUI : MonoBehaviour
 		// K: can someone do this? I'm not sure what variables we're supposed to set for
 		// intial location, and to what...?
 
+		lastLng = myLocation.getLng ();
+		lastLat = myLocation.getLat ();
+		lastAlt = myLocation.getAlt ();
+
+
+
 		/* Set the camera components to initial values */
 		fracJourney = 0.0f;
 		destination = new Vector3 (myLocation.getLng (), myLocation.getAlt () + 20, myLocation.getLat ());

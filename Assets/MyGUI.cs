@@ -457,7 +457,13 @@ public class MyGUI : MonoBehaviour
 		if ((lastLng != myLocation.getLng ()) || (lastLat != myLocation.getLat ()) || (lastAlt != myLocation.getAlt ())) {
 			if (myMesh != null) {
 				double xdelta = MyLocation.Haversine.calculate (originY, originX, 0.0, originY, myLocation.getLng (), 0.0);
+				if (myLocation.getLng () < originX) {
+					xdelta = -xdelta;
+				}
 				double ydelta = MyLocation.Haversine.calculate (originY, originX, 0.0, myLocation.getLat (), originX, 0.0);
+				if (myLocation.getLat () < originY) {
+					ydelta = -ydelta;
+				}
 				destination = new Vector3 ((float)xdelta, 30.0f, (float)ydelta);
 				origin = new Vector3 (camera.transform.position.x, camera.transform.position.y, camera.transform.position.z);
 				fracJourney = 0.0f;

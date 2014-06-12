@@ -369,86 +369,94 @@ public class MyGUI : MonoBehaviour
 	void OnGUI ()
 	{
 		GUI.skin = this.myGUISkin;
-
+		
 		if (GUI.Button (new Rect (0, 0, Screen.width / 2, Screen.height / 10), "Fetch Status")) {
 			myNetworkHelper.refreshGameState (worldName, worldPassword, playerName, playerPassword, refreshGameStateInGUI);
 		}
 		if (GUI.Button (new Rect (Screen.width / 2, 0, Screen.width / 2, Screen.height / 10), "Show/Hide UI")) {
 			expandGUI = !expandGUI;
 		}
-
+		
 		Input.gyro.enabled = true;
-
+		
 		if (!expandGUI)
 			return;
-
+		
 		GUI.Box (new Rect (0, Screen.height / 10, Screen.width, Screen.height / 10), "Current Location");
 		GUI.Label (new Rect (0, Screen.height / 10, Screen.width, Screen.height / 10), "(" + myLocation.getLng () + ", " + myLocation.getLat () + ") " + myLocation.getAlt ());
-
+		
 		GUI.Box (new Rect (0, Screen.height / 10 * 2, Screen.width, Screen.height / 10), "Tower Location");
 		if (myNetworkHelper.isTowerSet ()) {
 			GUI.Label (new Rect (0, Screen.height / 10 * 2, Screen.width, Screen.height / 10), "(" + myNetworkHelper.getTowerLng () + ", " + myNetworkHelper.getTowerLat () + ") " + myNetworkHelper.getTowerAlt ());
 		} else {
 			GUI.Label (new Rect (0, Screen.height / 10 * 2, Screen.width, Screen.height / 10), "");
 		}
-
+		
 		GUI.Box (new Rect (0, Screen.height / 10 * 3, Screen.width, Screen.height / 10), "Bomb Location");
 		if (myNetworkHelper.isBombSet ()) {
 			GUI.Label (new Rect (0, Screen.height / 10 * 3, Screen.width, Screen.height / 10), "(" + myNetworkHelper.getBombLng () + ", " + myNetworkHelper.getBombLat () + ") " + myNetworkHelper.getBombAlt ());
 		} else {
 			GUI.Label (new Rect (0, Screen.height / 10 * 3, Screen.width, Screen.height / 10), "");
 		}
-
-
+		
+		
 		/* Left column */
-
+		
 		GUI.Box (new Rect (0, Screen.height / 10 * 4, Screen.width / 2, Screen.height / 10), "World Name");
 		worldName = GUI.TextField (new Rect (0, Screen.height / 10 * 4 + 10, Screen.width / 2, Screen.height / 10), worldName);
-
+		
 		GUI.Box (new Rect (0, Screen.height / 10 * 5, Screen.width / 2, Screen.height / 10), "World Password");
 		worldPassword = GUI.TextField (new Rect (0, Screen.height / 10 * 5 + 10, Screen.width / 2, Screen.height / 10), worldPassword);
-
+		
 		GUI.Box (new Rect (0, Screen.height / 10 * 6, Screen.width / 2, Screen.height / 10), "Player Name");
 		playerName = GUI.TextField (new Rect (0, Screen.height / 10 * 6 + 10, Screen.width / 2, Screen.height / 10), playerName);
-
+		
 		GUI.Box (new Rect (0, Screen.height / 10 * 7, Screen.width / 2, Screen.height / 10), "Player Password");
 		playerPassword = GUI.TextField (new Rect (0, Screen.height / 10 * 7 + 10, Screen.width / 2, Screen.height / 10), playerPassword);
-
+		
 		GUI.Box (new Rect (0, Screen.height / 10 * 8, Screen.width / 2, Screen.height / 10), "Secret Code");
 		secretcode = GUI.TextField (new Rect (0, Screen.height / 10 * 8 + 10, Screen.width / 2, Screen.height / 10), secretcode);
-
+		
 		/* Right column */
-
+		
 		if (GUI.Button (new Rect (Screen.width / 2, Screen.height / 10 * 4, Screen.width / 2, Screen.height / 10), "Place Tower")) {
 			// TODO: Code to place a tower
 			// K: Use -> public void buildTowerPoint(double lat, double lng, double alt)
-		}
 
+			myNetworkHelper.buildTowerPoint(myLocation.getLat(),myLocation.getLng(),myLocation.getAlt());
+
+		}
+		
 		if (GUI.Button (new Rect (Screen.width / 2, Screen.height / 10 * 5, Screen.width / 2, Screen.height / 10), "Upload Tower")) {
 			// TODO: Code to upload the tower coords
 			// K: Use -> public void uploadTowerPoint(string worldName,string worldPassword,string playerName,string playerPassword,Action<Dictionary<string,object>> callback)
-			// For all callacks, we already have this function -> private void genericCallback(Dictionary<string,object> state)
+			// For all callbacks, we already have this function -> private void genericCallback(Dictionary<string,object> state)
+			myNetworkHelper.uploadTowerPoint(worldName, worldPassword, playerName, playerPassword, genericCallback);
+			
 		}
-
+		
 		if (GUI.Button (new Rect (Screen.width / 2, Screen.height / 10 * 6, Screen.width / 2, Screen.height / 10), "Place Bomb")) {
 			// TODO: Code to place a bomb
 			// K: Use -> public void dropBombPoint(double lat, double lng, double alt)
-		}
 
+			myNetworkHelper.dropBombPoint(myLocation.getLat(),myLocation.getLng(),myLocation.getAlt());
+		}
+		
 		if (GUI.Button (new Rect (Screen.width / 2, Screen.height / 10 * 7, Screen.width / 2, Screen.height / 10), "Upload Bomb")) {
 			// TODO: Code to upload the bomb coords
 			// K: Use -> public void uploadBombPoint(string worldName,string worldPassword,string playerName,string playerPassword,Action<Dictionary<string,object>> callback)
 			// For all callacks, we already have this function -> private void genericCallback(Dictionary<string,object> state)
+			myNetworkHelper.uploadBombPoint(worldName, worldPassword, playerName, playerPassword, genericCallback);
 		}
-
+		
 		if (GUI.Button (new Rect (Screen.width / 2, Screen.height / 10 * 8, Screen.width / 2, Screen.height / 10), "Upload Code")) {
 			// TODO: Code to upload the secret code
 			// K: Use -> public void uploadCode(string worldName,string worldPassword,string playerName,string playerPassword,string code,Action<Dictionary<string,object>> callback)
 			// For all callacks, we already have this function -> private void genericCallback(Dictionary<string,object> state)
+
+			myNetworkHelper.uploadCode(worldName, worldPassword, playerName, playerPassword, secretcode,  genericCallback);
 		}
 	}
-
-
 
 	/** This is called by Unity in the draw loop and we use it to update the
 	 * camera to correspond with the physical position */
